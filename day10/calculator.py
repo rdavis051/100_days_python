@@ -23,36 +23,24 @@ operations  = {
     "/": divide
 }
 
-# Get first number
-num1 = int(input("What's the first number?: "))
-# print optional sybols
-for symbol in operations:
-    print(symbol)
-# get operation user wants to use
-operator = input("Please select an operator from the list above: ")
-# Get second number
-num2 = int(input("What's the second number?: "))
-#print(f"you chose to {operator} the two inputs of {num1} & {num2}")
+def calculator():
+    num1 = float(input("What's the first number?: "))
+    for symbol in operations:
+        print(symbol)
+    should_continue = True
 
-function = operations[operator]
-result = function(num1, num2)
-print(f"Result: {num1} {operator} {num2} =  {result}")
-print()
-answer = input("Do you want to continue? (Y/n): ").lower()
-if answer == 'y':
-    continue_operations = True
-else:
-    continue_operations = False
+    while should_continue:
+        operation_symbol = input("Pick an operation: ")
+        num2 = float(input("What's the next number?: "))
+        calculation_function = operations[operation_symbol]
+        answer = calculation_function(num1, num2)
 
-while continue_operations:
-    num = int(input("Please enter an new number: "))
-    operator = input("Please enter a new operator: ")
-    function = operations[operator]
-    new_result = function(result, num)
-    print(f'{result} {operator} {num} = {new_result}')
-    result = new_result
-    answer = input("Do you want to continue? (Y/n): ").lower()
-    if answer == 'y':
-        continue_operations = True
-    else:
-        continue_operations = False
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+
+        if input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start with a new calculation: ") == "y":
+            num1 = answer
+        else:
+            should_continue = False
+            calculator()
+
+calculator()
