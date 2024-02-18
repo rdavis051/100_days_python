@@ -35,6 +35,10 @@ def calculator():
 
     while should_continue:
         operation_symbol = input("Pick an operation: ")
+        if operation_symbol not in ("+", "-", "*", "/"):
+            print(f"'{operation_symbol}' is not a valid option - please try again!")
+            print("Exiting Program!!")
+            sys.exit()  
         num2 = float(input("What's the next number?: "))
         calculation_function = operations[operation_symbol]
         answer = calculation_function(num1, num2)
@@ -42,9 +46,9 @@ def calculator():
         print(f"{num1} {operation_symbol} {num2} = {answer}")
         
         keep_result = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start with a new calculation, or 'q' to quit: ").lower()
-        if keep_result == 'y':
+        if keep_result == 'y' or keep_result == 'yes':
             num1 = answer
-        elif keep_result == 'n':
+        elif keep_result == 'n' or keep_result == 'no':
             should_continue = False
             calculator()
         else:
