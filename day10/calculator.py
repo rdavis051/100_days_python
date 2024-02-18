@@ -1,5 +1,9 @@
 # Calculator
 import sys
+from art import logo
+
+print(logo)
+
 # Add
 def add(n1, n2):
     return n1 + n2
