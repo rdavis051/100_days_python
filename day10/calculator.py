@@ -35,6 +35,7 @@ def calculator():
 
     while should_continue:
         operation_symbol = input("Pick an operation: ")
+        # opertation symbol check
         if operation_symbol not in ("+", "-", "*", "/"):
             print(f"'{operation_symbol}' is not a valid option - please try again!")
             print("Exiting Program!!")
