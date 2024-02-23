@@ -1,7 +1,5 @@
 # this is a number guessing game
-import os
 import sys
-import random
 from random import randint
 import art
 
@@ -16,9 +14,7 @@ def another_guess(number):
 
 def play_game(attempts):
     """start guessing game with specfic number of attempts"""
-    #selected_number = random.choice(range(1, 101))
     selected_number = randint(1, 100)
-    #print(selected_number)
     attempts_counter = attempts
     continue_guessing = True
     while continue_guessing:

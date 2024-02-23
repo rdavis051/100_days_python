@@ -1,4 +1,4 @@
-# art from https://patorjk.com/software/taag/#p=display&f=Bloody&t=Guess%20The%20Number%20 - font bloody
+# ascii art from https://patorjk.com/software/taag/#p=display&f=Bloody&t=Guess%20The%20Number%20 - font bloody
 logo = '''
   ▄████  █    ██ ▓█████   ██████   ██████    ▄▄▄█████▓ ██░ ██ ▓█████     ███▄    █  █    ██  ███▄ ▄███▓ ▄▄▄▄   ▓█████  ██▀███     
  ██▒ ▀█▒ ██  ▓██▒▓█   ▀ ▒██    ▒ ▒██    ▒    ▓  ██▒ ▓▒▓██░ ██▒▓█   ▀     ██ ▀█   █  ██  ▓██▒▓██▒▀█▀ ██▒▓█████▄ ▓█   ▀ ▓██ ▒ ██▒   
