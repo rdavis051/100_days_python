@@ -12,13 +12,15 @@ def compare_followers(a_followers_cnt, b_followers_cnt):
     else:
         return "draw"
 
+
 def start_game():
+    """Starts the higher lower game"""
     correct_guess_cnt = 0
     total_guess_cnt = 0
     draws = 0
-    #while loop the keep going until the user guesses wrong
+    # while loop the keep going until the user guesses wrong
     user_correct = True
-    # set intial B account
+    # set initial B account
     account_b = random.choice(data)
 
     while user_correct:
