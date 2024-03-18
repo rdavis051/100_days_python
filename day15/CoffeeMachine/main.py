@@ -1,5 +1,3 @@
-import sys
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -32,6 +30,8 @@ resources = {
     "coffee": 100,
 }
 
+# TODO: 1. change how money is assigned and what it's tracking (profit refers to machine money)
+profit = 0
 money = 0
 
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
@@ -45,7 +45,7 @@ money = 0
 # 4. Check Transaction Successful
 # 5. Make Coffee
 
-def add_money(prev_funds):
+def add_money():
     """Returns the total calculated from coins inserted"""
     print("Please insert coins.")
     quarters = int(input("How many quarters?: "))
@@ -53,18 +53,14 @@ def add_money(prev_funds):
     nickles = int(input("How many nickles?: "))
     pennies = int(input("How many pennies?: "))
     quarters_amt = round(quarters * .25, 2)
-    #print(quarters_amt)
     dimes_amt = round(dimes * .10, 2)
-    #print(dimes_amt)
     nickles_amt = round(nickles * .05, 2)
-    #print(nickles_amt)
     pennies_amt = pennies * .01
-    #print(pennies_amt)
     total = round(quarters_amt + dimes_amt + nickles_amt + pennies_amt, 2)
-    return total + prev_funds
+    return total
 
 
-# TODO: 1. Check resources sufficient to make drink order
+# TODO: 2. Check resources sufficient to make drink order
 def enough_ingredients(coffee_type):
     """Checks there is enough ingredients to make coffee"""
     espresso_water = MENU['espresso']['ingredients']['water']
@@ -94,7 +90,7 @@ def enough_ingredients(coffee_type):
             return True
         elif resources['water'] < latte_water:
             print("Insufficient water")
-            return  False
+            return False
         elif resources['milk'] < latte_milk:
             print("Insufficient milk")
             return False
@@ -117,80 +113,45 @@ def enough_ingredients(coffee_type):
             print("Insufficient coffee")
             return False
 
-
-
 #def subtract_ingredients(coffee_type, money):
 #    """ subtracts the ingredients from resources """
 #    if coffee_type == "espresso":
 
 
 def print_report():
-    # Use a breakpoint in the code line below to debug your script.
-    #print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    """ Use a breakpoint in the code line below to debug your script. """
     print(f"Water: {resources['water']}ml")
     print(f"Milk: {resources['milk']}ml")
     print(f"Coffee: {resources['coffee']}g")
-    print(f"Money: ${money}")
+    print(f"Money: ${profit}")
 
 
-# TODO: 2. check if money added is enough to by drink, if not return funds.
+# TODO: 3. check if money added is enough to by drink, if not return funds.
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     continue_ordering = True
     while continue_ordering:
+        change = 0
         choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
-        if choice == 'report':
+        if choice == "off":
+            continue_ordering = False
+        elif choice == 'report':
             print_report()
-        elif choice == 'espresso':
-            print("In Espresso")
-            if money < MENU['espresso']['cost']:
-                money = add_money(money)
-                if money < MENU['espresso']['cost']:
-                    print("Sorry that's not enough money. Money refunded.")
-                    sys.exit()
-            ingredients = enough_ingredients('espresso')
+        elif choice == 'espresso' or choice == 'latte' or choice == 'cappuccino':
+            money = add_money()
+            if money < MENU[choice]['cost']:
+                print("Sorry that's not enough money. Money refunded.")
+                continue_ordering = False
+            ingredients = enough_ingredients(choice)
             if ingredients:
                 print(f"money is now: {money}")
-                money = round(money - MENU['espresso']['cost'], 2)
-                print(f"Here is ${money} in change.")
+                profit += MENU[choice]['cost']
+                change = round(money - MENU[choice]['cost'], 2)
+                print(f"Here is ${change} in change.")
                 print(f"Here is your expresso - Enjoy!")
             else:
                 print("There isn't enough ingredients for that drink!")
                 print(f"Returning funds - returning ${money}")
-        elif choice == 'latte':
-            print("In Latte")
-            if money < MENU['latte']['cost']:
-                money = add_money(money)
-                if money < MENU['latte']['cost']:
-                    print("Sorry that's not enough money. Money refunded.")
-                    sys.exit()
-            ingredients = enough_ingredients('latte')
-            if ingredients:
-                print(f"money is now: {money}")
-                money = round(money - MENU['latte']['cost'], 2)
-                print(f"Here is ${money} in change.")
-                print(f"Here is your latte - Enjoy!")
-            else:
-                print("There isn't enough ingredients for that drink!")
-                print(f"Returning funds - returning ${money}")
-        elif choice == 'cappuccino':
-            print("In Cappuccino")
-            if money < MENU['cappuccino']['cost']:
-                money = add_money(money)
-                if money < MENU['cappuccino']['cost']:
-                    print("Sorry that's not enough money. Money refunded")
-                    sys.exit()
-            ingredients = enough_ingredients('cappuccino')
-            if ingredients:
-                money = round(money - MENU['cappuccino']['cost'], 2)
-                print(f"money is now: {money}")
-                print(f"Her is ${money} in change.")
-                print(f"Here is your cappuccino - Enjoy!")
-            else:
-                print("There isn't enough ingredients for that drink!")
-                print(f"Returning funds - returning ${money}")
-        elif choice == 'off':
-            continue_ordering = False
         else:
             print("You chose an invalid option! - Try again")
 
