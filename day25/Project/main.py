@@ -17,7 +17,12 @@
 import pandas
 
 data = pandas.read_csv("weather_data.csv")
-#print(data)
+print(data)
+print(data[data.day == "Friday"])
+print()
+for row in data:
+    print(row)
+print()
 #print(data["temp"])
 data_dict = data.to_dict()
 print(data_dict)
